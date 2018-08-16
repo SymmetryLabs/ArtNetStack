@@ -269,15 +269,13 @@ public final class ArtNetPacketEncoder {
 
 		// Port Type
 		final Map<Integer, ControllerPortType> portsTypesMap = controller.getPortTypeMap();
-		ControllerPortType controllerPortType = null;
-		BitSet bitSet = null;
 		for (int i = 0; i != Constants.MAX_PORT; i++) {
-			controllerPortType = portsTypesMap.get(i);
+			ControllerPortType controllerPortType = portsTypesMap.get(i);
 			// No port
 			if (controllerPortType == null) {
 				byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 			} else {
-				bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
+				BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 				// First 4 bits (PROCOTOL)
 				if (controllerPortType.getType().equals(PortTypeEnum.DMX512)) {
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_4, false);    // DMX
@@ -322,7 +320,7 @@ public final class ArtNetPacketEncoder {
 			if (controllerGoodInput == null) {
 				byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 			} else {
-				bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
+				BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 				bitSet.set(
 					MagicNumbers.MAGIC_NUMBER_BIT_0,
 					MagicNumbers.MAGIC_NUMBER_BIT_1,
@@ -347,12 +345,12 @@ public final class ArtNetPacketEncoder {
 			if (controllerGoodOutput == null) {
 				byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 			} else {
-				bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 				bitSet.set(
 					MagicNumbers.MAGIC_NUMBER_BIT_0,
 					MagicNumbers.MAGIC_NUMBER_BIT_1,
 					false
 				);    // Unused and transmitted as zero
+				BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_1, controllerGoodOutput.getMergeLTP());
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, controllerGoodOutput.getOutputShortDetected());
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, controllerGoodOutput.getOutputmergeArtNet());
@@ -407,7 +405,7 @@ public final class ArtNetPacketEncoder {
 		byteArrayOutputStream.write(byteArrayOutTempOutputStream.toByteArray());
 
 		// Screen
-		bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
+		BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 		if (controller.getScreen()) {
 			// Ethernet data display
 			bitSet.set(1, true);
