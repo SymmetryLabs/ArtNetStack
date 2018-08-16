@@ -223,13 +223,14 @@ public final class ArtNetPacketEncoder {
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_199));
 
 		// Manufactor code
-		byteArrayOutputStream.write(ByteUtils.toByta("CZ"));
+		// byteArrayOutputStream.write(ByteUtils.toByta(controller.getEstaCode()));
+		byteArrayOutputStream.write(ByteUtilsArt.hexStringToByteArray("ff7f"));
 
 		// ShotName
 		byteArrayOutputStream.write(
 			ByteUtils.toByta(
 				encodeString(
-					Constants.SHORT_NAME,
+					controller.getShortName(),
 					Constants.MAX_LENGTH_SHORT_NAME
 				)
 			)
@@ -239,7 +240,7 @@ public final class ArtNetPacketEncoder {
 		byteArrayOutputStream.write(
 			ByteUtils.toByta(
 				encodeString(
-					Constants.LONG_NAME,
+					controller.getLongName(),
 					Constants.MAX_LENGTH_LONG_NAME
 				)
 			)

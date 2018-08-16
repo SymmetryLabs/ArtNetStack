@@ -15,6 +15,7 @@
  */
 package fr.azelart.artnetstack.domain.controller;
 
+import fr.azelart.artnetstack.constants.Constants;
 import fr.azelart.artnetstack.domain.artnet.ArtNetObject;
 
 import java.util.Map;
@@ -63,6 +64,12 @@ public class Controller extends ArtNetObject {
 	public final void setGoodInputMapping(final Map<Integer, ControllerGoodInput> goodInputMapping) {
 		this.goodInputMapping = goodInputMapping;
 	}
+	
+	private String estaCode = "CZ";
+
+	private String shortName = Constants.SHORT_NAME;
+
+	private String longName = Constants.LONG_NAME;
 
 	/**
 	 * Controler.
@@ -141,5 +148,29 @@ public class Controller extends ArtNetObject {
 	 */
 	public void setSubNetwork(final int subNetwork) {
 		this.subNetwork = subNetwork;
+	}
+
+	public void setEstaCode(final String estaCode) {
+		this.estaCode = estaCode;
+	}
+
+	public String getEstaCode() {
+		return estaCode;
+	}
+
+	public void setShortName(final String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setLongName(final String longName) {
+		this.longName = longName;
+	}
+
+	public String getLongName() {
+		return longName;
 	}
 }
