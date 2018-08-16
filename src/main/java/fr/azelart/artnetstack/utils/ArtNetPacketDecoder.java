@@ -265,9 +265,9 @@ public class ArtNetPacketDecoder {
 		// Physical (1*8)
 		artDMX.setPhysicalPort(bytes[MagicNumbers.MAGIC_NUMBER_13] & Constants.INT_ESCAP);
 
-		// Subnet (1*8) and subswtich (1*8)
-		artDMX.setSubNet(String.format("%02X", bytes[MagicNumbers.MAGIC_NUMBER_14]));
-		artDMX.setSubSwitch(String.format("%02X", bytes[MagicNumbers.MAGIC_NUMBER_15]));
+		// SubUni (1*8) and Net (1*8)
+		artDMX.setSubUni(String.format("%02X", bytes[MagicNumbers.MAGIC_NUMBER_14]));
+		artDMX.setNet(String.format("%02X", bytes[MagicNumbers.MAGIC_NUMBER_15]));
 
 		// Length of DMX data (1*8)
 		artDMX.setLengthHi(bytes[MagicNumbers.MAGIC_NUMBER_16] & Constants.INT_ESCAP);

@@ -16,6 +16,7 @@
 package fr.azelart.artnetstack.domain.artdmx;
 
 import fr.azelart.artnetstack.constants.Constants;
+import fr.azelart.artnetstack.constants.MagicNumbers;
 import fr.azelart.artnetstack.domain.artnet.ArtNetObject;
 
 /**
@@ -47,10 +48,12 @@ public class ArtDMX extends ArtNetObject {
 	private int physicalPort;
 
 	/** Network. */
-	private String subNet;
+	private String net;
 
-	/** Adress in network. */
-	private String subSwitch;
+	/** Universe + SubNet in network. */
+	private String subUni;
+	private String universe;
+	private String subNet;
 
 	/**
 	 * The length of the DMX512 data array. This value
@@ -152,31 +155,48 @@ public class ArtDMX extends ArtNetObject {
 	}
 
 	/**
+	 * @return the net
+	 */
+	public final String getNet() {
+		return net;
+	}
+
+	/**
+	 * @param pNet the net to set
+	 */
+	public final void setNet(final String pNet) {
+		this.net = pNet;
+	}
+
+	/**
+	 * @return the subUni
+	 */
+	public final String getSubUni() {
+		return subUni;
+	}
+
+	/**
+	 * @param pSubUni the subUni to set
+	 */
+	public final void setSubUni(final String pSubUni) {
+		this.subUni = pSubUni;
+		int subUniInt = Integer.parseInt(pSubUni, MagicNumbers.MAGIC_NUMBER_16);
+		this.subNet = Integer.toString((subUniInt >> 4) & 0xF, MagicNumbers.MAGIC_NUMBER_16);
+		this.universe = Integer.toString(subUniInt & 0xF, MagicNumbers.MAGIC_NUMBER_16);
+	}
+
+	/**
+	 * @return the universe
+	 */
+	public final String getUniverse() {
+		return universe;
+	}
+
+	/**
 	 * @return the subNet
 	 */
 	public final String getSubNet() {
 		return subNet;
-	}
-
-	/**
-	 * @param pSubNet the subNet to set
-	 */
-	public final void setSubNet(final String pSubNet) {
-		this.subNet = pSubNet;
-	}
-
-	/**
-	 * @return the subSwitch
-	 */
-	public final String getSubSwitch() {
-		return subSwitch;
-	}
-
-	/**
-	 * @param pSubSwitch the pSubSwitch to set
-	 */
-	public final void setSubSwitch(final String pSubSwitch) {
-		this.subSwitch = pSubSwitch;
 	}
 
 	/**
