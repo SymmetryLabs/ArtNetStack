@@ -456,9 +456,13 @@ public final class ArtNetPacketEncoder {
 	 */
 	private static String encodeString(final String text, final int size) {
 		final StringBuffer sb = new StringBuffer();
-		sb.append(text);
-		for (int i = text.length(); i != size; i++) {
-			sb.append(" ");
+		if (text.length() > size-1) {
+			sb.append(text.subSequence(0, size-1));
+		} else {
+			sb.append(text);
+		}
+		for (int i = sb.length(); i < size; i++) {
+			sb.append('\u0000');
 		}
 		return sb.toString();
 	}
