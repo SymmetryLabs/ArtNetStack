@@ -28,6 +28,7 @@ import fr.azelart.artnetstack.domain.enums.PortTypeEnum;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.util.BitSet;
 import java.util.Map;
 
@@ -431,9 +432,8 @@ public final class ArtNetPacketEncoder {
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 
 		// MAC
-		// TODO : Implement it.
-		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
-		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
+		NetworkInterface network = NetworkInterface.getByInetAddress(inetAdress);
+		byteArrayOutputStream.write(network.getHardwareAddress());
 
 		// Bind IP Address (not implemented)
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
@@ -443,6 +443,18 @@ public final class ArtNetPacketEncoder {
 
 		// Bind Index (not implemented)
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
+
+		// Status2
+		// Node’s IP is DHCP configured.
+		// Node is DHCP capable.
+		// Node supports 8 bit Port-Address (ArtNet II).
+		// Node not able to switch between ArtNet and sACN.
+		byteArrayOutputStream.write(MagicNumbers.MAGIC_NUMBER_6);
+
+		// Filler
+		for (int i = 0; i < 26; i++) {
+			byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
+		}
 
 		return byteArrayOutputStream.toByteArray();
 	}
