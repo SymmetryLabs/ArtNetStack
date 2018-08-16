@@ -307,10 +307,18 @@ public final class ArtNetPacketEncoder {
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, true);                                        // ARTNET
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, MagicNumbers.MAGIC_NUMBER_BIT_6, false);	// ARTNET
 				}
-				// Set if this channel can input onto the Art-NetNetwork
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, controllerPortType.isInputArtNet());
+
+				PortInputOutputEnum direction = controllerPortType.getDirection();
+				boolean outputEnabled = direction != null && (direction.equals(PortInputOutputEnum.OUTPUT)
+								|| direction.equals(PortInputOutputEnum.BOTH));
+				boolean inputEnabled = direction != null && (direction.equals(PortInputOutputEnum.INPUT)
+								|| direction.equals(PortInputOutputEnum.BOTH));
+
+				// Set if this channel can input onto the Art-Net Network
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, inputEnabled);
 				// Set is this channel can output data from the Art-Net Network
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_7, controllerPortType.isOutputArtNet());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_7, outputEnabled);
+
 				byteArrayOutputStream.write(toByteArray(bitSet));
 			}
 		}

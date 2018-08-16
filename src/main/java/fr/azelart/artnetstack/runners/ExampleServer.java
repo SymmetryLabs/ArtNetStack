@@ -53,8 +53,6 @@ public class ExampleServer {
 		// Create one port
 		final Map<Integer,ControllerPortType> vPorts = new HashMap<Integer, ControllerPortType>();
 		ControllerPortType vPort1 = new ControllerPortType();
-		vPort1.setInputArtNet( true );
-		vPort1.setOutputArtNet( true );
 		vPort1.setPort( 0 );
 		vPort1.setType( PortTypeEnum.DMX512 );
 		vPort1.setDirection( PortInputOutputEnum.BOTH );

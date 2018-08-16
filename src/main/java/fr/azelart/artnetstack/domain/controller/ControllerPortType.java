@@ -48,12 +48,6 @@ public class ControllerPortType {
 		this.direction = direction;
 	}
 
-	/** Specify if we can input communicate. */
-	private boolean inputArtNet;
-
-	/** Specify if we can output communicate. */
-	private boolean outputArtNet;
-
 	/**
 	 * @return the port
 	 */
@@ -80,33 +74,5 @@ public class ControllerPortType {
 	 */
 	public final void setType(final PortTypeEnum type) {
 		this.type = type;
-	}
-
-	/**
-	 * @return the inputArtNet
-	 */
-	public final boolean isInputArtNet() {
-		return inputArtNet;
-	}
-
-	/**
-	 * @param inputArtNet the inputArtNet to set
-	 */
-	public final void setInputArtNet(final boolean inputArtNet) {
-		this.inputArtNet = inputArtNet;
-	}
-
-	/**
-	 * @return the outputArtNet
-	 */
-	public final boolean isOutputArtNet() {
-		return outputArtNet;
-	}
-
-	/**
-	 * @param outputArtNet the outputArtNet to set
-	 */
-	public final void setOutputArtNet(final boolean outputArtNet) {
-		this.outputArtNet = outputArtNet;
 	}
 }
