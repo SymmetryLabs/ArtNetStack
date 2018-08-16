@@ -216,7 +216,6 @@ public class ArtNetServer {
 	 */
 	public final void stop() {
 		running = false;
-		datagramSocket.disconnect();
 		datagramSocket.close();
 		try {
 			thread.join();
