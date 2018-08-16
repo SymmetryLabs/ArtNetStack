@@ -26,7 +26,7 @@ public class ControllerGoodOutput {
 	private boolean mergeLTP;
 
 	/** DMX output short detected on power up. */
-	private boolean outputPowerOn;
+	private boolean outputShortDetected;
 
 	/** Output is merging ArtNet data. */
 	private boolean outputmergeArtNet;
@@ -65,17 +65,17 @@ public class ControllerGoodOutput {
 	}
 
 	/**
-	 * @return the outputPowerOn
+	 * @return the outputShortDetected
 	 */
-	public final boolean getOutputPowerOn() {
-		return outputPowerOn;
+	public final boolean getOutputShortDetected() {
+		return outputShortDetected;
 	}
 
 	/**
-	 * @param outputPowerOn the outputPowerOn to set
+	 * @param outputShortDetected the outputShortDetected to set
 	 */
-	public final void setOutputPowerOn(boolean outputPowerOn) {
-		this.outputPowerOn = outputPowerOn;
+	public final void setOutputShortDetected(boolean outputShortDetected) {
+		this.outputShortDetected = outputShortDetected;
 	}
 
 	/**

@@ -354,7 +354,7 @@ public final class ArtNetPacketEncoder {
 					false
 				);    // Unused and transmitted as zero
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_1, controlerGoodOutput.getMergeLTP());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, controlerGoodOutput.getOutputPowerOn());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, controlerGoodOutput.getOutputShortDetected());
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, controlerGoodOutput.getOutputmergeArtNet());
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, controlerGoodOutput.getIncludeDMXTextPackets());
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_5, controlerGoodOutput.getIncludeDMXSIPsPackets());

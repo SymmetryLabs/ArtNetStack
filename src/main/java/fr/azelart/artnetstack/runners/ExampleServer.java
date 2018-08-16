@@ -75,7 +75,7 @@ public class ExampleServer {
 		final Map<Integer,ControllerGoodOutput> vGoodOutputsMap = new HashMap<Integer, ControllerGoodOutput>();
 		ControllerGoodOutput vGoodOutput1 = new ControllerGoodOutput();
 		vGoodOutput1.setDataTransmited( true );
-		vGoodOutput1.setOutputPowerOn( true );
+		vGoodOutput1.setOutputShortDetected( false );
 		vGoodOutput1.setOutputMergeArtNet( false );
 		vGoodOutput1.setMergeLTP( false );
 		vGoodOutput1.setIncludeDMXTextPackets( false );
