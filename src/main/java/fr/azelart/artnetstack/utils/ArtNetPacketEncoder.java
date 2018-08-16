@@ -266,14 +266,22 @@ public final class ArtNetPacketEncoder {
 			)
 		);
 
+		final Map<Integer, ControllerPortType> portsTypesMap = controller.getPortTypeMap();
+
 		// NumPortHi (0, future evolution of ArtNet protocol)
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 
 		// NumPortLo (Between 0 and 4, max is 4)
-		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_4));
+		int numPorts = 0;
+		for (int i = 0; i != Constants.MAX_PORT; i++) {
+			ControllerPortType controllerPortType = portsTypesMap.get(i);
+			if (controllerPortType != null) {
+				numPorts = i+1;
+			}
+		}
+		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(numPorts));
 
 		// Port Type
-		final Map<Integer, ControllerPortType> portsTypesMap = controller.getPortTypeMap();
 		for (int i = 0; i != Constants.MAX_PORT; i++) {
 			ControllerPortType controllerPortType = portsTypesMap.get(i);
 			// No port
