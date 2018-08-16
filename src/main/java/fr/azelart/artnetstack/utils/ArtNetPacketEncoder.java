@@ -278,35 +278,35 @@ public final class ArtNetPacketEncoder {
 				BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 				// First 4 bits (PROCOTOL)
 				if (controllerPortType.getType().equals(PortTypeEnum.DMX512)) {
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_4, false);    // DMX
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_6, false);	// DMX
 				} else if (controllerPortType.getType().equals(PortTypeEnum.MIDI)) {
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_3, false);    // MIDI
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, true);                                        // MIDI
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, true);										// MIDI
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_1, MagicNumbers.MAGIC_NUMBER_BIT_6, false);	// MIDI
 				} else if (controllerPortType.getType().equals(PortTypeEnum.AVAB)) {
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_2, false);    // AVAB
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, true);                                        // AVAB
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, false);                                        // AVAB
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, false);										// AVAB
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_1, true);										// AVAB
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, MagicNumbers.MAGIC_NUMBER_BIT_6, false);	// AVAB
 				} else if (controllerPortType.getType().equals(PortTypeEnum.COLORTRANCMX)) {
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_2, false);    // COLORTRAN
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_2, true);		// COLORTRAN
 					bitSet.set(
-						MagicNumbers.MAGIC_NUMBER_BIT_3,
-						MagicNumbers.MAGIC_NUMBER_BIT_4,
-						true
+						MagicNumbers.MAGIC_NUMBER_BIT_2,
+						MagicNumbers.MAGIC_NUMBER_BIT_6,
+						false
 					);        // COLORTRAN
 				} else if (controllerPortType.getType().equals(PortTypeEnum.ADB)) {
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_1, false);    // ADB
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_2, false);	// ADB
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, true);                                        // ADB
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, MagicNumbers.MAGIC_NUMBER_BIT_4, false);    // ADB
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, MagicNumbers.MAGIC_NUMBER_BIT_6, false);	// ADB
 				} else if (controllerPortType.getType().equals(PortTypeEnum.ARTNET)) {
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_1, false);    // ARTNET
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, true);										// ARTNET
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_1, false);										// ARTNET
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, true);                                        // ARTNET
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, false);                                        // ARTNET
-					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, true);                                        // ARTNET
+					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, MagicNumbers.MAGIC_NUMBER_BIT_6, false);	// ARTNET
 				}
 				// Set if this channel can input onto the Art-NetNetwork
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_5, controllerPortType.isInputArtNet());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, controllerPortType.isInputArtNet());
 				// Set is this channel can output data from the Art-Net Network
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, controllerPortType.isOutputArtNet());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_7, controllerPortType.isOutputArtNet());
 				byteArrayOutputStream.write(toByteArray(bitSet));
 			}
 		}
@@ -323,7 +323,7 @@ public final class ArtNetPacketEncoder {
 				BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 				bitSet.set(
 					MagicNumbers.MAGIC_NUMBER_BIT_0,
-					MagicNumbers.MAGIC_NUMBER_BIT_1,
+					MagicNumbers.MAGIC_NUMBER_BIT_2,
 					false
 				);    // Unused and transmitted as zero
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, controllerGoodInput.getReceivedDataError());
@@ -345,12 +345,8 @@ public final class ArtNetPacketEncoder {
 			if (controllerGoodOutput == null) {
 				byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 			} else {
-				bitSet.set(
-					MagicNumbers.MAGIC_NUMBER_BIT_0,
-					MagicNumbers.MAGIC_NUMBER_BIT_1,
-					false
-				);    // Unused and transmitted as zero
 				BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, false);    // Output is selected to transmit Art-Net.
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_1, controllerGoodOutput.getMergeLTP());
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, controllerGoodOutput.getOutputShortDetected());
 				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, controllerGoodOutput.getOutputmergeArtNet());
