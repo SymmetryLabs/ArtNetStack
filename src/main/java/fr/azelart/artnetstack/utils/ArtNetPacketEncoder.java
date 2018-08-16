@@ -216,11 +216,14 @@ public final class ArtNetPacketEncoder {
 		byteArrayOutputStream.write(controller.getNetwork());
 		byteArrayOutputStream.write(controller.getSubNetwork());
 
-		// Oem and UBEA
+		// Oem
 		byteArrayOutputStream.write(ByteUtilsArt.hexStringToByteArray(("0x00ff")));
 
+		// UBEA Version
+		byteArrayOutputStream.write(MagicNumbers.MAGIC_NUMBER_ZERO);
+
 		// Status1
-		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_199));
+		byteArrayOutputStream.write(0xf0);
 
 		// Manufactor code
 		// byteArrayOutputStream.write(ByteUtils.toByta(controller.getEstaCode()));
@@ -422,19 +425,23 @@ public final class ArtNetPacketEncoder {
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
-		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 
 		// Style
 		// TODO
+		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 
 		// MAC
 		// TODO : Implement it.
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
+
+		// Bind IP Address (not implemented)
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
+
+		// Bind Index (not implemented)
 		byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 
 		return byteArrayOutputStream.toByteArray();
