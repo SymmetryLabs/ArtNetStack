@@ -23,25 +23,25 @@ package fr.azelart.artnetstack.domain.controller;
 public class ControllerGoodOutput {
 
 	/** The merge mode is LTP. */
-	private Boolean mergeLTP;
+	private boolean mergeLTP;
 
 	/** DMX output short detected on power up. */
-	private Boolean outputPowerOn;
+	private boolean outputPowerOn;
 
 	/** Output is merging ArtNet data. */
-	private Boolean outputmergeArtNet;
+	private boolean outputmergeArtNet;
 
 	/** This output accept DMX Text packets. */
-	private Boolean includeDMXTextPackets;
+	private boolean includeDMXTextPackets;
 
 	/** This output accept DMX SIPs packets. */
-	private Boolean includeDMXSIPsPackets;
+	private boolean includeDMXSIPsPackets;
 
 	/** This output accept DMX test packets. */
-	private Boolean includeDMXTestPackets;
+	private boolean includeDMXTestPackets;
 
 	/** This output transmit data. */
-	private Boolean dataTransmited;
+	private boolean dataTransmited;
 
 	/**
 	 * Constructor.
@@ -53,98 +53,98 @@ public class ControllerGoodOutput {
 	/**
 	 * @return the mergeLTP
 	 */
-	public final Boolean getMergeLTP() {
+	public final boolean getMergeLTP() {
 		return mergeLTP;
 	}
 
 	/**
 	 * @param mergeLTP the mergeLTP to set
 	 */
-	public final void setMergeLTP(Boolean mergeLTP) {
+	public final void setMergeLTP(boolean mergeLTP) {
 		this.mergeLTP = mergeLTP;
 	}
 
 	/**
 	 * @return the outputPowerOn
 	 */
-	public final Boolean getOutputPowerOn() {
+	public final boolean getOutputPowerOn() {
 		return outputPowerOn;
 	}
 
 	/**
 	 * @param outputPowerOn the outputPowerOn to set
 	 */
-	public final void setOutputPowerOn(Boolean outputPowerOn) {
+	public final void setOutputPowerOn(boolean outputPowerOn) {
 		this.outputPowerOn = outputPowerOn;
 	}
 
 	/**
 	 * @return the outputmergeArtNet
 	 */
-	public final Boolean getOutputmergeArtNet() {
+	public final boolean getOutputmergeArtNet() {
 		return outputmergeArtNet;
 	}
 
 	/**
 	 * @param outputmergeArtNet the outputmergeArtNet to set
 	 */
-	public final void setOutputMergeArtNet(final Boolean outputmergeArtNet) {
+	public final void setOutputMergeArtNet(final boolean outputmergeArtNet) {
 		this.outputmergeArtNet = outputmergeArtNet;
 	}
 
 	/**
 	 * @return the includeDMXTextPackets
 	 */
-	public final Boolean getIncludeDMXTextPackets() {
+	public final boolean getIncludeDMXTextPackets() {
 		return includeDMXTextPackets;
 	}
 
 	/**
 	 * @param includeDMXTextPackets the includeDMXTextPackets to set
 	 */
-	public final void setIncludeDMXTextPackets(final Boolean includeDMXTextPackets) {
+	public final void setIncludeDMXTextPackets(final boolean includeDMXTextPackets) {
 		this.includeDMXTextPackets = includeDMXTextPackets;
 	}
 
 	/**
 	 * @return the includeDMXSIPsPackets
 	 */
-	public final Boolean getIncludeDMXSIPsPackets() {
+	public final boolean getIncludeDMXSIPsPackets() {
 		return includeDMXSIPsPackets;
 	}
 
 	/**
 	 * @param includeDMXSIPsPackets the includeDMXSIPsPackets to set
 	 */
-	public final void setIncludeDMXSIPsPackets(Boolean includeDMXSIPsPackets) {
+	public final void setIncludeDMXSIPsPackets(boolean includeDMXSIPsPackets) {
 		this.includeDMXSIPsPackets = includeDMXSIPsPackets;
 	}
 
 	/**
 	 * @return the includeDMXTestPackets
 	 */
-	public final Boolean getIncludeDMXTestPackets() {
+	public final boolean getIncludeDMXTestPackets() {
 		return includeDMXTestPackets;
 	}
 
 	/**
 	 * @param includeDMXTestPackets the includeDMXTestPackets to set
 	 */
-	public final void setIncludeDMXTestPackets(final Boolean includeDMXTestPackets) {
+	public final void setIncludeDMXTestPackets(final boolean includeDMXTestPackets) {
 		this.includeDMXTestPackets = includeDMXTestPackets;
 	}
 
 	/**
 	 * @return the dataTransmited
 	 */
-	public final Boolean getDataTransmited() {
+	public final boolean getDataTransmited() {
 		return dataTransmited;
 	}
 
 	/**
 	 * @param dataTransmited the dataTransmited to set
 	 */
-	public final void setDataTransmited(final Boolean dataTransmited) {
+	public final void setDataTransmited(final boolean dataTransmited) {
 		this.dataTransmited = dataTransmited;
 	}
 }

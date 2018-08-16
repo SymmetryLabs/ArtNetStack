@@ -38,7 +38,7 @@ public class Controller extends ArtNetObject {
 	 * Set to false when video display is showing local data.
 	 * Set to true when video is showing ethernet data.
 	 */
-	private Boolean screen;
+	private boolean screen;
 
 	/**
 	 * Network identifier, 0-255.
@@ -102,7 +102,7 @@ public class Controller extends ArtNetObject {
 	/**
 	 * @return the screen
 	 */
-	public final Boolean getScreen() {
+	public final boolean getScreen() {
 		return screen;
 	}
 
@@ -111,7 +111,7 @@ public class Controller extends ArtNetObject {
 	 * Set to true when video is showing ethernet data.
 	 * @param screen the screen to set
 	 */
-	public final void setScreen(final Boolean screen) {
+	public final void setScreen(final boolean screen) {
 		this.screen = screen;
 	}
 

@@ -23,22 +23,22 @@ package fr.azelart.artnetstack.domain.controller;
 public class ControllerGoodInput {
 
 	/** Input receive data in error. */
-	private Boolean receivedDataError;
+	private boolean receivedDataError;
 
 	/** Input is disabled. */
-	private Boolean disabled;
+	private boolean disabled;
 
 	/** This input accept DMX Text packets. */
-	private Boolean includeDMXTextPackets;
+	private boolean includeDMXTextPackets;
 
 	/** This input accept DMX SIPs packets. */
-	private Boolean includeDMXSIPsPackets;
+	private boolean includeDMXSIPsPackets;
 
 	/** This input accept DMX test packets. */
-	private Boolean includeDMXTestPackets;
+	private boolean includeDMXTestPackets;
 
 	/** This input receive data. */
-	private Boolean dataReceived;
+	private boolean dataReceived;
 
 	/**
 	 * Constructor.
@@ -50,84 +50,84 @@ public class ControllerGoodInput {
 	/**
 	 * @return the receivedDataError
 	 */
-	public final Boolean getReceivedDataError() {
+	public final boolean getReceivedDataError() {
 		return receivedDataError;
 	}
 
 	/**
 	 * @param receivedDataError the receivedDataError to set
 	 */
-	public final void setReceivedDataError(final Boolean receivedDataError) {
+	public final void setReceivedDataError(final boolean receivedDataError) {
 		this.receivedDataError = receivedDataError;
 	}
 
 	/**
 	 * @return the disabled
 	 */
-	public final Boolean getDisabled() {
+	public final boolean getDisabled() {
 		return disabled;
 	}
 
 	/**
 	 * @param disabled the disabled to set
 	 */
-	public void setDisabled(final Boolean disabled) {
+	public void setDisabled(final boolean disabled) {
 		this.disabled = disabled;
 	}
 
 	/**
 	 * @return the includeDMXTextPackets
 	 */
-	public final Boolean getIncludeDMXTextPackets() {
+	public final boolean getIncludeDMXTextPackets() {
 		return includeDMXTextPackets;
 	}
 
 	/**
 	 * @param includeDMXTextPackets the includeDMXTextPackets to set
 	 */
-	public final void setIncludeDMXTextPackets(Boolean includeDMXTextPackets) {
+	public final void setIncludeDMXTextPackets(boolean includeDMXTextPackets) {
 		this.includeDMXTextPackets = includeDMXTextPackets;
 	}
 
 	/**
 	 * @return the includeDMXSIPsPackets
 	 */
-	public final Boolean getIncludeDMXSIPsPackets() {
+	public final boolean getIncludeDMXSIPsPackets() {
 		return includeDMXSIPsPackets;
 	}
 
 	/**
 	 * @param includeDMXSIPsPackets the includeDMXSIPsPackets to set
 	 */
-	public final void setIncludeDMXSIPsPackets(Boolean includeDMXSIPsPackets) {
+	public final void setIncludeDMXSIPsPackets(boolean includeDMXSIPsPackets) {
 		this.includeDMXSIPsPackets = includeDMXSIPsPackets;
 	}
 
 	/**
 	 * @return the includeDMXTestPackets
 	 */
-	public final Boolean getIncludeDMXTestPackets() {
+	public final boolean getIncludeDMXTestPackets() {
 		return includeDMXTestPackets;
 	}
 
 	/**
 	 * @param includeDMXTestPackets the includeDMXTestPackets to set
 	 */
-	public final void setIncludeDMXTestPackets(Boolean includeDMXTestPackets) {
+	public final void setIncludeDMXTestPackets(boolean includeDMXTestPackets) {
 		this.includeDMXTestPackets = includeDMXTestPackets;
 	}
 
 	/**
 	 * @return the dataReceived
 	 */
-	public final Boolean getDataReceived() {
+	public final boolean getDataReceived() {
 		return dataReceived;
 	}
 
 	/**
 	 * @param dataReceived the dataReceived to set
 	 */
-	public final void setDataReceived(final Boolean dataReceived) {
+	public final void setDataReceived(final boolean dataReceived) {
 		this.dataReceived = dataReceived;
 	}
 }
