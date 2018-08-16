@@ -253,7 +253,8 @@ public final class ArtNetPacketEncoder {
 		//Node report
 		final int vArtPollCounter = artPollCounter + 1;
 		final StringBuffer nodeReport = new StringBuffer();
-		nodeReport.append("#").append("0x0000");    // Debug mode, see table 3
+		// nodeReport.append("#").append("0x0000");	// Debug mode, see table 3
+		nodeReport.append("#").append("0x0001");	// Power On Tests successful, see table 3
 		nodeReport.append("[").append(vArtPollCounter).append("]");
 		nodeReport.append("ok");
 		byteArrayOutputStream.write(
