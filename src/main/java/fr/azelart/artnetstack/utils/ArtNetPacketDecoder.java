@@ -64,7 +64,6 @@ public class ArtNetPacketDecoder {
 		
 		// Extract OpCode
 		int opCode = ((packet[9] & 0xFF) << 8) | (packet[8] & 0xFF);
-		opCode = Integer.parseInt(Integer.toHexString(opCode));
 
 		// Yes, it's a ArtNetPacket
 		if (!"Art-Net".equals(id)) {
