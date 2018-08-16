@@ -363,4 +363,11 @@ public class ArtNetServer {
 	public final int getPort() {
 		return port;
 	}
+
+	/**
+	 * @return the address
+	 */
+	public final InetAddress getListenAddress() {
+		return listenAddress;
+	}
 }
