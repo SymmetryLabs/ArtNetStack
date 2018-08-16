@@ -269,57 +269,57 @@ public final class ArtNetPacketEncoder {
 
 		// Port Type
 		final Map<Integer, ControllerPortType> portsTypesMap = controller.getPortTypeMap();
-		ControllerPortType controlerPortType = null;
+		ControllerPortType controllerPortType = null;
 		BitSet bitSet = null;
 		for (int i = 0; i != Constants.MAX_PORT; i++) {
-			controlerPortType = portsTypesMap.get(i);
+			controllerPortType = portsTypesMap.get(i);
 			// No port
-			if (controlerPortType == null) {
+			if (controllerPortType == null) {
 				byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 			} else {
 				bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 				// First 4 bits (PROCOTOL)
-				if (controlerPortType.getType().equals(PortTypeEnum.DMX512)) {
+				if (controllerPortType.getType().equals(PortTypeEnum.DMX512)) {
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_4, false);    // DMX
-				} else if (controlerPortType.getType().equals(PortTypeEnum.MIDI)) {
+				} else if (controllerPortType.getType().equals(PortTypeEnum.MIDI)) {
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_3, false);    // MIDI
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, true);                                        // MIDI
-				} else if (controlerPortType.getType().equals(PortTypeEnum.AVAB)) {
+				} else if (controllerPortType.getType().equals(PortTypeEnum.AVAB)) {
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_2, false);    // AVAB
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, true);                                        // AVAB
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, false);                                        // AVAB
-				} else if (controlerPortType.getType().equals(PortTypeEnum.COLORTRANCMX)) {
+				} else if (controllerPortType.getType().equals(PortTypeEnum.COLORTRANCMX)) {
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_2, false);    // COLORTRAN
 					bitSet.set(
 						MagicNumbers.MAGIC_NUMBER_BIT_3,
 						MagicNumbers.MAGIC_NUMBER_BIT_4,
 						true
 					);        // COLORTRAN
-				} else if (controlerPortType.getType().equals(PortTypeEnum.ADB)) {
+				} else if (controllerPortType.getType().equals(PortTypeEnum.ADB)) {
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_1, false);    // ADB
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, true);                                        // ADB
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, MagicNumbers.MAGIC_NUMBER_BIT_4, false);    // ADB
-				} else if (controlerPortType.getType().equals(PortTypeEnum.ARTNET)) {
+				} else if (controllerPortType.getType().equals(PortTypeEnum.ARTNET)) {
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_0, MagicNumbers.MAGIC_NUMBER_BIT_1, false);    // ARTNET
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, true);                                        // ARTNET
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, false);                                        // ARTNET
 					bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, true);                                        // ARTNET
 				}
 				// Set if this channel can input onto the Art-NetNetwork
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_5, controlerPortType.isInputArtNet());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_5, controllerPortType.isInputArtNet());
 				// Set is this channel can output data from the Art-Net Network
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, controlerPortType.isOutputArtNet());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, controllerPortType.isOutputArtNet());
 				byteArrayOutputStream.write(toByteArray(bitSet));
 			}
 		}
 
 		// Good Input
 		final Map<Integer, ControllerGoodInput> portsGoodInputsMap = controller.getGoodInputMapping();
-		ControllerGoodInput controlerGoodInput = null;
+		ControllerGoodInput controllerGoodInput = null;
 		for (int i = 0; i != Constants.MAX_PORT; i++) {
-			controlerGoodInput = portsGoodInputsMap.get(i);
+			controllerGoodInput = portsGoodInputsMap.get(i);
 			// No port
-			if (controlerGoodInput == null) {
+			if (controllerGoodInput == null) {
 				byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 			} else {
 				bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
@@ -328,23 +328,23 @@ public final class ArtNetPacketEncoder {
 					MagicNumbers.MAGIC_NUMBER_BIT_1,
 					false
 				);    // Unused and transmitted as zero
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, controlerGoodInput.getReceivedDataError());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, controlerGoodInput.getDisabled());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, controlerGoodInput.getIncludeDMXTextPackets());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_5, controlerGoodInput.getIncludeDMXSIPsPackets());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, controlerGoodInput.getIncludeDMXTestPackets());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_7, controlerGoodInput.getDataReceived());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, controllerGoodInput.getReceivedDataError());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, controllerGoodInput.getDisabled());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, controllerGoodInput.getIncludeDMXTextPackets());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_5, controllerGoodInput.getIncludeDMXSIPsPackets());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, controllerGoodInput.getIncludeDMXTestPackets());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_7, controllerGoodInput.getDataReceived());
 				byteArrayOutputStream.write(toByteArray(bitSet));
 			}
 		}
 
 		// Good Ouput
 		final Map<Integer, ControllerGoodOutput> portsGoodOutputsMap = controller.getGoodOutputMapping();
-		ControllerGoodOutput controlerGoodOutput = null;
+		ControllerGoodOutput controllerGoodOutput = null;
 		for (int i = 0; i != Constants.MAX_PORT; i++) {
-			controlerGoodOutput = portsGoodOutputsMap.get(i);
+			controllerGoodOutput = portsGoodOutputsMap.get(i);
 			// No port
-			if (controlerGoodOutput == null) {
+			if (controllerGoodOutput == null) {
 				byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 			} else {
 				bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
@@ -353,13 +353,13 @@ public final class ArtNetPacketEncoder {
 					MagicNumbers.MAGIC_NUMBER_BIT_1,
 					false
 				);    // Unused and transmitted as zero
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_1, controlerGoodOutput.getMergeLTP());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, controlerGoodOutput.getOutputShortDetected());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, controlerGoodOutput.getOutputmergeArtNet());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, controlerGoodOutput.getIncludeDMXTextPackets());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_5, controlerGoodOutput.getIncludeDMXSIPsPackets());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, controlerGoodOutput.getIncludeDMXTestPackets());
-				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_7, controlerGoodOutput.getDataTransmited());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_1, controllerGoodOutput.getMergeLTP());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_2, controllerGoodOutput.getOutputShortDetected());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_3, controllerGoodOutput.getOutputmergeArtNet());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_4, controllerGoodOutput.getIncludeDMXTextPackets());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_5, controllerGoodOutput.getIncludeDMXSIPsPackets());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_6, controllerGoodOutput.getIncludeDMXTestPackets());
+				bitSet.set(MagicNumbers.MAGIC_NUMBER_BIT_7, controllerGoodOutput.getDataTransmited());
 				byteArrayOutputStream.write(toByteArray(bitSet));
 			}
 		}
@@ -370,19 +370,19 @@ public final class ArtNetPacketEncoder {
 		final ByteArrayOutputStream byteArrayInTempOutputStream = new ByteArrayOutputStream();
 		final ByteArrayOutputStream byteArrayOutTempOutputStream = new ByteArrayOutputStream();
 		for (int i = 0; i != Constants.MAX_PORT; i++) {
-			controlerPortType = portsTypesMap.get(i);
+			controllerPortType = portsTypesMap.get(i);
 			bitSetIn = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 			bitSetOut = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
 
 			// No port
-			if (controlerPortType == null || controlerPortType.getDirection() == null) {
+			if (controllerPortType == null || controllerPortType.getDirection() == null) {
 				bitSetIn.set(i, false);
 				bitSetOut.set(i, false);
-			} else if (controlerPortType.getDirection().equals(PortInputOutputEnum.INPUT)) {
+			} else if (controllerPortType.getDirection().equals(PortInputOutputEnum.INPUT)) {
 				bitSetIn.set(i, true);
-			} else if (controlerPortType.getDirection().equals(PortInputOutputEnum.OUTPUT)) {
+			} else if (controllerPortType.getDirection().equals(PortInputOutputEnum.OUTPUT)) {
 				bitSetOut.set(i, true);
-			} else if (controlerPortType.getDirection().equals(PortInputOutputEnum.BOTH)) {
+			} else if (controllerPortType.getDirection().equals(PortInputOutputEnum.BOTH)) {
 				bitSetIn.set(i, true);
 				bitSetOut.set(i, true);
 			} else {
