@@ -44,7 +44,7 @@ import java.util.List;
  * @author Corentin Azelart.
  *
  */
-public class ArtNetServer extends Thread implements Runnable {
+public class ArtNetServer {
 
 	/**
 	 * Socket communication.
@@ -111,11 +111,12 @@ public class ArtNetServer extends Thread implements Runnable {
 		datagramSocket = new MulticastSocket(port);
 	}
 
-	/**
-	 * Server execution.
-	 */
-	@Override
-	public final void run() {
+	private Thread thread = new Thread() {
+		/**
+		 * Server execution.
+		 */
+		@Override
+		public final void run() {
 		// Define inputDatagramPacket
 		DatagramPacket inputDatagramPacket = null;
 
@@ -156,11 +157,14 @@ public class ArtNetServer extends Thread implements Runnable {
 					}
 				}
 			} catch (final Exception e) {
-				e.getMessage();
-				e.printStackTrace();
+				if (running) {
+					e.getMessage();
+					e.printStackTrace();
+				}
 			}
 		}
-	}
+		}
+	};
 
 	/**
 	 * Determines the broadcast address used by the interface which owns the given ip address. The given IP must
@@ -195,12 +199,24 @@ public class ArtNetServer extends Thread implements Runnable {
 	}
 
 	/**
+	 * Start server.
+	 */
+	public final void start() {
+		thread.start();
+	}
+
+	/**
 	 * Stop server.
 	 */
-	public final void stopServer() {
+	public final void stop() {
 		running = false;
 		datagramSocket.disconnect();
 		datagramSocket.close();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		fireServerTerminate();
 	}
 
