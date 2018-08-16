@@ -240,7 +240,7 @@ public class ArtNetServer extends Thread implements Runnable {
 	/**
 	 * Server is connected.
 	 */
-	public final void fireServerConnect() {
+	private void fireServerConnect() {
 		for (final ServerListener listener : this.listenersListServer) {
 			listener.onConnect();
 		}
@@ -249,7 +249,7 @@ public class ArtNetServer extends Thread implements Runnable {
 	/**
 	 * Server is die.
 	 */
-	public final void fireServerTerminate() {
+	private void fireServerTerminate() {
 		for (final ServerListener listener : this.listenersListServer) {
 			listener.onTerminate();
 		}
@@ -277,7 +277,7 @@ public class ArtNetServer extends Thread implements Runnable {
 	 * A new ArtPollPacket incoming.
 	 * @param artPoll is the artPollPacket
 	 */
-	public final void fireArtPoll(final ArtPoll artPoll) {
+	private void fireArtPoll(final ArtPoll artPoll) {
 		for (final ArtNetPacketListener listener : this.listenersListPacket) {
 			listener.onArtPoll(artPoll);
 		}
@@ -287,7 +287,7 @@ public class ArtNetServer extends Thread implements Runnable {
 	 * A new ArtTimeCode incoming.
 	 * @param artTimeCode is the instance of the artTimeCodePacket
 	 */
-	public final void fireArtTimeCode(final ArtTimeCode artTimeCode) {
+	private void fireArtTimeCode(final ArtTimeCode artTimeCode) {
 		for (final ArtNetPacketListener listener : this.listenersListPacket) {
 			listener.onArtTimeCode(artTimeCode);
 		}
@@ -297,7 +297,7 @@ public class ArtNetServer extends Thread implements Runnable {
 	 * A new ArtPollReply incoming.
 	 * @param artPollReply is the instance of the artPollReplyPacket
 	 */
-	public final void fireArtPollReply(final ArtPollReply artPollReply) {
+	private void fireArtPollReply(final ArtPollReply artPollReply) {
 		for (final ArtNetPacketListener listener : this.listenersListPacket) {
 			listener.onArtPollReply(artPollReply);
 		}
@@ -307,7 +307,7 @@ public class ArtNetServer extends Thread implements Runnable {
 	 * A new ArtDMX incoming.
 	 * @param artDMX is the instance of the artDMX pakcet
 	 */
-	public final void fireArtDMXReply(final ArtDMX artDMX) {
+	private void fireArtDMXReply(final ArtDMX artDMX) {
 		for (final ArtNetPacketListener listener : this.listenersListPacket) {
 			listener.onArtDMX(artDMX);
 		}
@@ -317,7 +317,7 @@ public class ArtNetServer extends Thread implements Runnable {
 	 * A new ArtAddress incoming.
 	 * @param artAddress is the instance of the artAddress pakcet
 	 */
-	public final void fireArtAddressReply(final ArtAddress artAddress) {
+	private void fireArtAddressReply(final ArtAddress artAddress) {
 		for (final ArtNetPacketListener listener : this.listenersListPacket) {
 			listener.onArtAddress(artAddress);
 		}
