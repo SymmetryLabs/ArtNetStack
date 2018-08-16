@@ -59,7 +59,6 @@ public class ExampleServer {
 		vPorts.put(0, vPort1);
 
 		// Set status port1 input
-		final Map<Integer,ControllerGoodInput> vGoodInputsMap = new HashMap<Integer, ControllerGoodInput>();
 		ControllerGoodInput vGoodInput1 = new ControllerGoodInput();
 		vGoodInput1.setDisabled( false );
 		vGoodInput1.setDataReceived( true );
@@ -67,10 +66,9 @@ public class ExampleServer {
 		vGoodInput1.setIncludeDMXTestPackets( true );
 		vGoodInput1.setIncludeDMXTextPackets( true );
 		vGoodInput1.setReceivedDataError( false );
-		vGoodInputsMap.put(0, vGoodInput1);
+		vPort1.setGoodInput( vGoodInput1 );
 
 		// Set status port1 output
-		final Map<Integer,ControllerGoodOutput> vGoodOutputsMap = new HashMap<Integer, ControllerGoodOutput>();
 		ControllerGoodOutput vGoodOutput1 = new ControllerGoodOutput();
 		vGoodOutput1.setDataTransmited( true );
 		vGoodOutput1.setOutputShortDetected( false );
@@ -79,13 +77,11 @@ public class ExampleServer {
 		vGoodOutput1.setIncludeDMXTextPackets( false );
 		vGoodOutput1.setIncludeDMXTestPackets( false );
 		vGoodOutput1.setIncludeDMXSIPsPackets( false );
-		vGoodOutputsMap.put(0, vGoodOutput1);
+		vPort1.setGoodOutput( vGoodOutput1 );
 		
 		// Display
 		thisControler.setScreen( false );
 
-		thisControler.setGoodOutputMapping( vGoodOutputsMap );
-		thisControler.setGoodInputMapping(vGoodInputsMap);
 		thisControler.setPortTypeMap(vPorts);
 		
 		// Network

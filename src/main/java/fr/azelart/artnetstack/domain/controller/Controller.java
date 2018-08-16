@@ -29,12 +29,6 @@ public class Controller extends ArtNetObject {
 	/** Port mapping. */
 	private Map<Integer, ControllerPortType> portTypeMap;
 
-	/** GoodInput mapping. */
-	private Map<Integer, ControllerGoodInput> goodInputMapping;
-
-	/** GoodOutput mapping. */
-	private Map<Integer, ControllerGoodOutput> goodOutputMapping;
-
 	/**
 	 * Set to false when video display is showing local data.
 	 * Set to true when video is showing ethernet data.
@@ -51,20 +45,6 @@ public class Controller extends ArtNetObject {
 	 */
 	private int subNetwork = 0x0D;
 
-	/**
-	 * @return the goodInputMapping
-	 */
-	public final Map<Integer, ControllerGoodInput> getGoodInputMapping() {
-		return goodInputMapping;
-	}
-
-	/**
-	 * @param goodInputMapping the goodInputMapping to set
-	 */
-	public final void setGoodInputMapping(final Map<Integer, ControllerGoodInput> goodInputMapping) {
-		this.goodInputMapping = goodInputMapping;
-	}
-	
 	private String estaCode = "CZ";
 
 	private String shortName = Constants.SHORT_NAME;
@@ -90,20 +70,6 @@ public class Controller extends ArtNetObject {
 	 */
 	public final void setPortTypeMap(final Map<Integer, ControllerPortType> portTypeMap) {
 		this.portTypeMap = portTypeMap;
-	}
-
-	/**
-	 * @return the goodOutputMapping
-	 */
-	public final Map<Integer, ControllerGoodOutput> getGoodOutputMapping() {
-		return goodOutputMapping;
-	}
-
-	/**
-	 * @param goodOutputMapping the goodOutputMapping to set
-	 */
-	public final void setGoodOutputMapping(final Map<Integer, ControllerGoodOutput> goodOutputMapping) {
-		this.goodOutputMapping = goodOutputMapping;
 	}
 
 	/**

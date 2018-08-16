@@ -48,6 +48,12 @@ public class ControllerPortType {
 		this.direction = direction;
 	}
 
+	/** GoodInput. */
+	private ControllerGoodInput goodInput;
+
+	/** GoodOutput. */
+	private ControllerGoodOutput goodOutput;
+
 	/**
 	 * @return the port
 	 */
@@ -74,5 +80,33 @@ public class ControllerPortType {
 	 */
 	public final void setType(final PortTypeEnum type) {
 		this.type = type;
+	}
+
+	/**
+	 * @return the goodInput
+	 */
+	public final ControllerGoodInput getGoodInput() {
+		return goodInput;
+	}
+
+	/**
+	 * @param goodInput the goodInput to set
+	 */
+	public final void setGoodInput(final ControllerGoodInput goodInput) {
+		this.goodInput = goodInput;
+	}
+
+	/**
+	 * @return the goodOutput
+	 */
+	public final ControllerGoodOutput getGoodOutput() {
+		return goodOutput;
+	}
+
+	/**
+	 * @param goodOutput the goodOutput to set
+	 */
+	public final void setGoodOutput(final ControllerGoodOutput goodOutput) {
+		this.goodOutput = goodOutput;
 	}
 }

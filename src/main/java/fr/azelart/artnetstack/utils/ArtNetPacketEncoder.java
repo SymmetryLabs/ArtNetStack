@@ -324,12 +324,11 @@ public final class ArtNetPacketEncoder {
 		}
 
 		// Good Input
-		final Map<Integer, ControllerGoodInput> portsGoodInputsMap = controller.getGoodInputMapping();
-		ControllerGoodInput controllerGoodInput = null;
 		for (int i = 0; i != Constants.MAX_PORT; i++) {
-			controllerGoodInput = portsGoodInputsMap.get(i);
+			ControllerPortType controllerPortType = portsTypesMap.get(i);
+			ControllerGoodInput controllerGoodInput;
 			// No port
-			if (controllerGoodInput == null) {
+			if (controllerPortType == null || (controllerGoodInput = controllerPortType.getGoodInput()) == null) {
 				byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 			} else {
 				BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
@@ -349,12 +348,11 @@ public final class ArtNetPacketEncoder {
 		}
 
 		// Good Ouput
-		final Map<Integer, ControllerGoodOutput> portsGoodOutputsMap = controller.getGoodOutputMapping();
-		ControllerGoodOutput controllerGoodOutput = null;
 		for (int i = 0; i != Constants.MAX_PORT; i++) {
-			controllerGoodOutput = portsGoodOutputsMap.get(i);
+			ControllerPortType controllerPortType = portsTypesMap.get(i);
+			ControllerGoodOutput controllerGoodOutput;
 			// No port
-			if (controllerGoodOutput == null) {
+			if (controllerPortType == null || (controllerGoodOutput = controllerPortType.getGoodOutput()) == null) {
 				byteArrayOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
 			} else {
 				BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
@@ -370,47 +368,30 @@ public final class ArtNetPacketEncoder {
 			}
 		}
 
-		// Directions
-		BitSet bitSetIn;
-		BitSet bitSetOut;
-		final ByteArrayOutputStream byteArrayInTempOutputStream = new ByteArrayOutputStream();
-		final ByteArrayOutputStream byteArrayOutTempOutputStream = new ByteArrayOutputStream();
 		for (int i = 0; i != Constants.MAX_PORT; i++) {
-			controllerPortType = portsTypesMap.get(i);
-			bitSetIn = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
-			bitSetOut = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
-
-			// No port
-			if (controllerPortType == null || controllerPortType.getDirection() == null) {
-				bitSetIn.set(i, false);
-				bitSetOut.set(i, false);
-			} else if (controllerPortType.getDirection().equals(PortInputOutputEnum.INPUT)) {
-				bitSetIn.set(i, true);
-			} else if (controllerPortType.getDirection().equals(PortInputOutputEnum.OUTPUT)) {
-				bitSetOut.set(i, true);
-			} else if (controllerPortType.getDirection().equals(PortInputOutputEnum.BOTH)) {
-				bitSetIn.set(i, true);
-				bitSetOut.set(i, true);
+			ControllerPortType controllerPortType = portsTypesMap.get(i);
+			if (controllerPortType != null && controllerPortType.getDirection() != null
+							&& (controllerPortType.getDirection().equals(PortInputOutputEnum.INPUT)
+								|| controllerPortType.getDirection().equals(PortInputOutputEnum.BOTH))) {
+				byteArrayOutputStream.write(controllerPortType.getUniverse());
 			} else {
-				bitSetIn.set(i, false);
-				bitSetOut.set(i, false);
-			}
-
-
-			if (bitSetIn.isEmpty()) {
-				byteArrayInTempOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
-			} else {
-				byteArrayInTempOutputStream.write(toByteArray(bitSetIn));
-			}
-
-			if (bitSetOut.isEmpty()) {
-				byteArrayOutTempOutputStream.write(ByteUtilsArt.in8toByte(MagicNumbers.MAGIC_NUMBER_ZERO));
-			} else {
-				byteArrayOutTempOutputStream.write(toByteArray(bitSetOut));
+				// No port
+				byteArrayOutputStream.write(0);
 			}
 		}
-		byteArrayOutputStream.write(byteArrayInTempOutputStream.toByteArray());
-		byteArrayOutputStream.write(byteArrayOutTempOutputStream.toByteArray());
+
+		for (int i = 0; i != Constants.MAX_PORT; i++) {
+			ControllerPortType controllerPortType = portsTypesMap.get(i);
+
+			if (controllerPortType != null && controllerPortType.getDirection() != null
+							&& (controllerPortType.getDirection().equals(PortInputOutputEnum.OUTPUT)
+								|| controllerPortType.getDirection().equals(PortInputOutputEnum.BOTH))) {
+				byteArrayOutputStream.write(controllerPortType.getUniverse());
+			} else {
+				// No port
+				byteArrayOutputStream.write(0);
+			}
+		}
 
 		// Screen
 		BitSet bitSet = new BitSet(MagicNumbers.MAGIC_NUMBER_BITSET);
