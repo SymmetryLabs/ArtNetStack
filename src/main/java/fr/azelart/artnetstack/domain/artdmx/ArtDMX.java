@@ -65,6 +65,11 @@ public class ArtDMX extends ArtNetObject {
 	/**
 	 * Low Byte of above.
 	 */
+	private int lengthLo;
+
+	/**
+	 * Length
+	 */
 	private int length;
 
 	/**
@@ -91,7 +96,7 @@ public class ArtDMX extends ArtNetObject {
 		vSb.append(",port=");
 		vSb.append(physicalPort);
 		vSb.append(",length=");
-		vSb.append(lengthHi);
+		vSb.append(length);
 		if (data.length >= 1) {
 			vSb.append(",C0=");
 			vSb.append(data[0]);
@@ -186,6 +191,22 @@ public class ArtDMX extends ArtNetObject {
 	 */
 	public final void setLengthHi(final int pLengthHi) {
 		this.lengthHi = pLengthHi;
+		setLength(lengthHi, lengthLo);
+	}
+
+	/**
+	 * @return the lengthLo
+	 */
+	public final int getLengthLo() {
+		return lengthLo;
+	}
+
+	/**
+	 * @param pLengthLo the length to set.
+	 */
+	public final void setLengthLo(final int pLengthLo) {
+		this.lengthLo = pLengthLo;
+		setLength(lengthHi, lengthLo);
 	}
 
 	/**
@@ -195,11 +216,8 @@ public class ArtDMX extends ArtNetObject {
 		return length;
 	}
 
-	/**
-	 * @param pLength the length to set.
-	 */
-	public final void setLength(final int pLength) {
-		this.length = pLength;
+	public final void setLength(int highByte, int lowByte) {
+		this.length = (highByte << 4) & lowByte;
 	}
 
 	/**

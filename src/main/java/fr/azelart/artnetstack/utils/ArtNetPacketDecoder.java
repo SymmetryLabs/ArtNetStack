@@ -273,7 +273,7 @@ public class ArtNetPacketDecoder {
 		artDMX.setLengthHi(bytes[MagicNumbers.MAGIC_NUMBER_16] & Constants.INT_ESCAP);
 
 		// Low Byte of above. (1*8)
-		artDMX.setLength(bytes[MagicNumbers.MAGIC_NUMBER_17] & Constants.INT_ESCAP);
+		artDMX.setLengthLo(bytes[MagicNumbers.MAGIC_NUMBER_17] & Constants.INT_ESCAP);
 
 		// An variable length array of DMX512 lighting data
 		final byte[] dmx = new byte[Constants.DMX_512_SIZE];
