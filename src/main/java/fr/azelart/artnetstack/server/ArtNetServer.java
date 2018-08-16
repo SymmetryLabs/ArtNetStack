@@ -38,6 +38,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * A Thread for the server.
@@ -80,6 +81,8 @@ public class ArtNetServer {
 	 * Running.
 	 */
 	private boolean running = false;
+
+	private final ConcurrentLinkedQueue<Runnable> threadTasks = new ConcurrentLinkedQueue<Runnable>();
 
 	/**
 	 * Creates an ArtNet server for the given addresses.
@@ -136,6 +139,8 @@ public class ArtNetServer {
 				datagramSocket.receive(inputDatagramPacket);
 				vArtNetObject = ArtNetPacketDecoder.decodeArtNetPacket(inputDatagramPacket.getData(), inputDatagramPacket.getAddress());
 
+				processThreadTasks();
+
 				// It's realy an artnet packet.
 				if (vArtNetObject != null) {
 					fireArtNet(vArtNetObject);
@@ -155,6 +160,7 @@ public class ArtNetServer {
 						// ArtAddress
 						fireArtAddressReply((ArtAddress) vArtNetObject);
 					}
+					processThreadTasks();
 				}
 			} catch (final Exception e) {
 				if (running) {
@@ -217,6 +223,7 @@ public class ArtNetServer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		processThreadTasks();
 		fireServerTerminate();
 	}
 
@@ -251,6 +258,17 @@ public class ArtNetServer {
 	 */
 	public final void addListenerServer(final ServerListener serverListener) {
 		this.listenersListServer.add(serverListener);
+	}
+
+	public final void addThreadTask(Runnable task) {
+		threadTasks.add(task);
+	}
+
+	private void processThreadTasks() {
+		Runnable runnable;
+		while ((runnable = threadTasks.poll()) != null) {
+			runnable.run();
+		}
 	}
 
 	/**
