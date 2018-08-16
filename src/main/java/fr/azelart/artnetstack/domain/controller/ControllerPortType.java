@@ -25,8 +25,8 @@ import fr.azelart.artnetstack.domain.enums.PortTypeEnum;
  */
 public class ControllerPortType {
 
-	/** Port Number. */
-	private int port;
+	/** Universe. */
+	private int universe;
 
 	/** Port type. */
 	private PortTypeEnum type;
@@ -57,15 +57,15 @@ public class ControllerPortType {
 	/**
 	 * @return the port
 	 */
-	public final int getPort() {
-		return port;
+	public final int getUniverse() {
+		return universe;
 	}
 
 	/**
-	 * @param port the port to set
+	 * @param universe the universe to set
 	 */
-	public final void setPort(final int port) {
-		this.port = port;
+	public final void setUniverse(final int universe) {
+		this.universe = universe;
 	}
 
 	/**
